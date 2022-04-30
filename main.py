@@ -25,7 +25,10 @@ def parse_json():
         contents = json.load(file)
         chat_history, user_comments = contents['comments'], {}
         for data in chat_history:
-            print(data, end='\n\n')  # Separating with a new lines to get a better visual on data. Temporary code.
+            if data['commenter']['display_name'] not in user_comments:
+                user_comments[data['commenter']['display_name']] = data['message']['body'].strip().split()
+            else:
+                user_comments[data['commenter']['display_name']].extend(data['message']['body'].strip().split())
 
 
 def main():
