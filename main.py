@@ -44,7 +44,7 @@ def parse_json(keyword) -> dict:
 
 def main():
     rename_file()
-    print((parse_json('lmao')))  # Test to search for "lmao" keyword
+    print(parse_json('lmao'))  # Test to search for "wow" keyword
 
 
 main()
