@@ -17,23 +17,34 @@ def rename_file(cwd=os.getcwd()):
             os.rename(file, 'downloaded_chat.json')
 
 
-def parse_json():
+def parse_json(keyword) -> dict:
     """
-    Reads the JSON file and cleans up the data.
+    Reads the JSON file and searches for keyword.
+
+    Arguments:
+        keyword - The target word that should be searched for.
+
+    Returns:
+        A dictionary containing the usernames of each user with a message that containing the keyword.
     """
     with open('downloaded_chat.json', 'r', encoding="utf-8") as file:
         contents = json.load(file)
-        chat_history, user_comments = contents['comments'], {}
+        keyword_matches, chat_history = {}, contents['comments']
+
         for data in chat_history:
-            if data['commenter']['display_name'] not in user_comments:
-                user_comments[data['commenter']['display_name']] = data['message']['body'].strip().split()
-            else:
-                user_comments[data['commenter']['display_name']].extend(data['message']['body'].strip().split())
+            phrase, time_sent, user_name = data['message']['body'].lower().strip().split(), data['created_at'].replace(
+                'T', ' ').replace('Z', ' ').strip(), data['commenter']['display_name']
+            if keyword.lower() in phrase and user_name not in keyword_matches:
+                keyword_matches[user_name] = {time_sent: phrase}
+            elif keyword.lower() in phrase and user_name in keyword_matches:
+                keyword_matches[user_name] = {**keyword_matches[user_name], time_sent: phrase}
+
+        return keyword_matches
 
 
 def main():
     rename_file()
-    parse_json()
+    print((parse_json('lmao')))  # Test to search for "lmao" keyword
 
 
 main()
