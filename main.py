@@ -9,8 +9,7 @@ def rename_file(cwd=os.getcwd()):
     that's easier to work with after the vod chat has been
     downloaded via TwitchDownloader.
 
-    Keyword Arguments:
-        cwd - A string representing the current working directory.
+    :param cwd: A string representing the current working directory.
     """
     for file in os.listdir(cwd):
         if file.endswith('.json'):
@@ -21,11 +20,8 @@ def parse_json(keyword) -> dict:
     """
     Reads the JSON file and searches for keyword.
 
-    Arguments:
-        keyword - The target word that should be searched for.
-
-    Returns:
-        A dictionary containing the usernames of each user with a message that containing the keyword.
+    :param keyword: The target word that should be searched for.
+    :return: A dictionary containing the usernames of each user with a message that containing the keyword.
     """
     with open('downloaded_chat.json', 'r', encoding="utf-8") as file:
         contents = json.load(file)
@@ -42,9 +38,23 @@ def parse_json(keyword) -> dict:
         return keyword_matches
 
 
+def dump_matches(matches, file_name):
+    """
+    Writes all the matched users that sent a message
+    containing the targeted keyword to a text file (created in the current directory),
+    along with the time / date the message was sent.
+
+    :param matches: Dictionary that contains all users that sent a message(s) containing the targeted keyword.
+    :param file_name: The text file to write the information to.
+    """
+    with open(file_name, 'a') as file:
+        for user, msg_data in matches.items():
+            for time, txt in msg_data.items():
+                file.write(f'Date: {time.replace(" ", ", Time: " )}\n{user} said: "{" ".join(txt)}".\n\n')
+
+
 def main():
-    rename_file()
-    print(parse_json('lmao'))  # Test to search for "wow" keyword
+    dump_matches(parse_json('lol'), 'test.txt')  # Test attempt.
 
 
 main()
