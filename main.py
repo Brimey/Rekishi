@@ -50,11 +50,16 @@ def dump_matches(matches, file_name):
     with open(file_name, 'a') as file:
         for user, msg_data in matches.items():
             for time, txt in msg_data.items():
-                file.write(f'Date: {time.replace(" ", ", Time: " )}\n{user} said: "{" ".join(txt)}".\n\n')
+                file.write(f'Date: {time.replace(" ", ", Time: ")}\n{user} said: "{" ".join(txt)}".\n\n')
+
+
+def send_email():
+    ...
 
 
 def main():
-    dump_matches(parse_json('lol'), 'test.txt')  # Test attempt.
+    rename_file()
+    dump_matches(parse_json(input('Enter a keyword to search for: ')), 'matches.txt')  # Test attempt.
 
 
 main()
