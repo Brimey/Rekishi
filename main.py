@@ -3,7 +3,7 @@ import json
 
 
 def rename_file(cwd=os.getcwd()):
-    # Make sure to set the file location of the downloaded chat to the same directory as this program.
+    # Make sure to set the file location of the downloaded chat from TwitchDownloader to the same directory as this program.
     """
     Renames the arbitrary .json file name to a generic format
     that's easier to work with after the vod chat has been
