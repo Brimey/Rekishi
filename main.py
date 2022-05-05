@@ -78,7 +78,9 @@ def create_connection():
 def main():
     # rename_file()
     # dump_matches(parse_json(input('Enter a keyword to search for: ')), 'matches.txt')  # Test attempt.
-    send_email() # Test attempt.
+    option = input('Would you like to email the text file containing the data to a recipient(s) (enter "Y" or "N")?: ')
+    if option.lower() == 'y':
+        send_email()  # Test attempt.
 
 
 main()
