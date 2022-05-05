@@ -57,30 +57,45 @@ def dump_matches(matches, file_name):
 
 
 def send_email():
-    port, password, connection = create_connection()
-    with smtplib.SMTP_SSL('smtp.gmail.com', port, context=connection) as server:
-        sender, recipients, message = input('Enter your Gmail username: '), input(
-            'Address of recipient(s): ').split(), f'Subject: Requested chat data.\n\n Message Test.'
-        server.login(sender, password)
-        server.sendmail(sender, recipients, message)
+    sender, recipients, message = input('Enter your Gmail username: '), input(
+        'Address of recipient(s): ').split(), f'Subject: Requested chat data.\n\nMessage Test.'
+
+    while True:
+        try:
+            port, password, connection = create_connection()
+            with smtplib.SMTP_SSL('smtp.gmail.com', port, context=connection) as server:
+                server.login(sender, password)
+                server.sendmail(sender, recipients, message)
+                break
+        except smtplib.SMTPAuthenticationError:
+            print(f'Username or password was incorrect. Enter the correct credentials and try again.')
 
 
 def create_connection():
     """
     Creates a secure connection for sending emails.
     Prevents echoing your password while typing for privacy reasons.
+
+    :return: A tuple containing the SSL port, the password for your email address, and a SSL object.
     """
     port, password, connection = 465, getpass.getpass(
         prompt='Enter the password for your Gmail account: '), ssl.create_default_context()
     return port, password, connection
 
 
+def ask_question():
+    option = input('''******If you're sending to multiple recipients, include a space between each address.******
+    \nWould you like to email the text file containing the data to a recipient(s) (enter "Y" or "N")?: 
+        ''')
+
+    if option.lower() == 'y':
+        send_email()  # Test attempt.
+
+
 def main():
     # rename_file()
     # dump_matches(parse_json(input('Enter a keyword to search for: ')), 'matches.txt')  # Test attempt.
-    option = input('Would you like to email the text file containing the data to a recipient(s) (enter "Y" or "N")?: ')
-    if option.lower() == 'y':
-        send_email()  # Test attempt.
+    ask_question()
 
 
 main()
