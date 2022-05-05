@@ -79,10 +79,15 @@ def ask_question():
         print('File containing matches was saved locally.')
 
 
+def wipe_file(file_name='matches.txt'):
+    open(file_name, 'w').close()
+
+
 def main():
     rename_file()
     dump_matches(parse_json(input('Enter a keyword to search for: ')), 'matches.txt')  # Test attempt.
     ask_question()
+    wipe_file()
 
 
 main()
