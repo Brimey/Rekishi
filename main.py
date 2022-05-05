@@ -74,7 +74,7 @@ def ask_question():
         ''')
 
     if option.lower() == 'y':
-        send_email()  # Test attempt.
+        send_email()
     else:
         print('File containing matches was saved locally.')
 
@@ -85,7 +85,7 @@ def wipe_file(file_name='matches.txt'):
 
 def main():
     rename_file()
-    dump_matches(parse_json(input('Enter a keyword to search for: ')), 'matches.txt')  # Test attempt.
+    dump_matches(parse_json(input('Enter a keyword to search for: ')), 'matches.txt')  
     ask_question()
     wipe_file()
 
