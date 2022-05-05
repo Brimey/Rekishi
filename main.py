@@ -1,9 +1,12 @@
-import os
 import json
+import os
+import smtplib
+import ssl
+import getpass
 
 
 def rename_file(cwd=os.getcwd()):
-    # Make sure to set the file location of the downloaded chat from TwitchDownloader to the same directory as this program.
+    # Make sure to set the file location of the downloaded chat to the same directory as this program.
     """
     Renames the arbitrary .json file name to a generic format
     that's easier to work with after the vod chat has been
@@ -12,7 +15,7 @@ def rename_file(cwd=os.getcwd()):
     :param cwd: A string representing the current working directory.
     """
     for file in os.listdir(cwd):
-        if file.endswith('.json'):
+        if file.endswith('.json') and file != 'downloaded_chat.json':
             os.rename(file, 'downloaded_chat.json')
 
 
@@ -54,12 +57,28 @@ def dump_matches(matches, file_name):
 
 
 def send_email():
-    ...
+    port, password, connection = create_connection()
+    with smtplib.SMTP_SSL('smtp.gmail.com', port, context=connection) as server:
+        sender, recipients, message = input('Enter your Gmail username: '), input(
+            'Address of recipient(s): ').split(), f'Subject: Requested chat data.\n\n Message Test.'
+        server.login(sender, password)
+        server.sendmail(sender, recipients, message)
+
+
+def create_connection():
+    """
+    Creates a secure connection for sending emails.
+    Prevents echoing your password while typing for privacy reasons.
+    """
+    port, password, connection = 465, getpass.getpass(
+        prompt='Enter the password for your Gmail account: '), ssl.create_default_context()
+    return port, password, connection
 
 
 def main():
-    rename_file()
-    dump_matches(parse_json(input('Enter a keyword to search for: ')), 'matches.txt')  # Test attempt.
+    # rename_file()
+    # dump_matches(parse_json(input('Enter a keyword to search for: ')), 'matches.txt')  # Test attempt.
+    send_email() # Test attempt.
 
 
 main()
