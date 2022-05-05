@@ -57,8 +57,9 @@ def dump_matches(matches, file_name):
 
 
 def send_email():
-    sender, recipients, message = input('Enter your Gmail username: '), input(
-        'Address of recipient(s): ').split(), f'Subject: Requested chat data.\n\nMessage Test.'
+    sender, recipients = input('Enter your Gmail username: '), input(
+        'Address of recipient(s): ').split(),
+    message = None
 
     while True:
         try:
@@ -93,9 +94,9 @@ def ask_question():
 
 
 def main():
-    # rename_file()
-    # dump_matches(parse_json(input('Enter a keyword to search for: ')), 'matches.txt')  # Test attempt.
-    ask_question()
+    rename_file()
+    dump_matches(parse_json(input('Enter a keyword to search for: ')), 'matches.txt')  # Test attempt.
+    # ask_question()
 
 
 main()
