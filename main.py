@@ -85,7 +85,7 @@ def wipe_file(file_name='matches.txt'):
 
 def main():
     rename_file()
-    dump_matches(parse_json(input('Enter a keyword to search for: ')), 'matches.txt')  
+    dump_matches(parse_json(input('Enter a keyword to search for: ')), 'matches.txt')
     ask_question()
     wipe_file()
 
