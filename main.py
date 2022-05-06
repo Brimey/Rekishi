@@ -50,7 +50,7 @@ def dump_matches(matches, file_name):
     :param matches: Dictionary that contains all users that sent a message(s) containing the targeted keyword.
     :param file_name: The text file to write the information to.
     """
-    with open(file_name, 'a') as file:
+    with open(file_name, 'a', encoding='utf-8') as file:
         for user, msg_data in matches.items():
             for time, txt in msg_data.items():
                 file.write(f'Date: {time.replace(" ", ", Time: ")}\n{user} said: "{" ".join(txt)}".\n\n')
@@ -59,11 +59,12 @@ def dump_matches(matches, file_name):
 def send_email():
     while True:
         try:
-            sender, recipients, message, password = input('Enter your Gmail username: '), input(
+            subject, sender, recipients, message, password = input('Enter subject title: '), input(
+                'Enter your Gmail username: '), input(
                 'Address of recipient(s): ').split(), f'{os.getcwd()}\\matches.txt', getpass.getpass(
                 prompt='Enter your password (password will not be echoed for privacy): ')
             with yagmail.SMTP(sender, password) as server:
-                server.send(to=recipients, subject='Here is a test attempt', attachments=message)
+                server.send(to=recipients, subject=subject, attachments=message)
                 break
         except SMTPAuthenticationError:
             print('Username or password entered incorrectly. Check credentials and try again.')
@@ -80,7 +81,7 @@ def ask_question():
 
 
 def wipe_file(file_name='matches.txt'):
-    with open(file_name, 'w'):
+    with open(file_name, 'w', encoding='utf-8'):
         pass
 
 
