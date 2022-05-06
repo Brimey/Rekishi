@@ -15,6 +15,7 @@ Rekishi is a tool used to collect chat data from a Twitch stream and gives you t
 - Extract the files in the .zip file to the folder of your choice.
 - Download the Rekishi .exe file from insert URL here.
 - Copy the .exe file to the same folder containing the files from the zip file.
+- Folder should look like this if the above steps were done properly:
 
 # Usage.
 - Run the TwitchDownloader
