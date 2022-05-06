@@ -80,7 +80,8 @@ def ask_question():
 
 
 def wipe_file(file_name='matches.txt'):
-    open(file_name, 'w').close()
+    with open(file_name, 'w'):
+        pass
 
 
 def main():
