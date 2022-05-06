@@ -16,9 +16,20 @@ Rekishi is a tool used to collect chat data from a Twitch stream and gives you t
 - Download the Rekishi .exe file from insert URL here.
 - Copy the .exe file to the same folder containing the files from the zip file.
 - Folder should look like this if the above steps were done properly:
+ 
+![Folder Preview](https://github.com/Brimey/Rekishi/blob/main/pictures/folder_preview.png)
 
 # Usage.
-- Run the TwitchDownloader
+- Run the TwitchDownloader .exe.
+- Select the "Chat Downloader" option.
+- Go to any **published** VOD on Twitch and copy the VOD ID (should look similar to this):
+
+![VOD ID](https://github.com/Brimey/Rekishi/blob/main/pictures/vod_id.png)
+- Paste it into the "VOD Link/ID" box in TwitchDownloader.
+- Click "Get Info".
+- Save it in the **same** folder that has the Rekishi .exe file.
+- Run the Rekishi .exe file.
+- You should be emailed a text file containing the parsed data. 
 
 ## Contributing
-Pull requests are welcome. Please make sure to update tests as appropriate.
+Feel free to contribute.
