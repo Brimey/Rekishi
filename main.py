@@ -15,7 +15,7 @@ def rename_file(cwd=os.getcwd()):
     :param cwd: A string representing the current working directory.
     """
     for file in os.listdir(cwd):
-        if file.endswith('.json') and file != 'downloaded_chat.json':
+        if file != 'preview_data.json' and file.endswith('json'):
             os.rename(file, 'downloaded_chat.json')
 
 
