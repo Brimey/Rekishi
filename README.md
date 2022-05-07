@@ -3,6 +3,8 @@ Rekishi is a tool used to collect chat data from a Twitch stream and gives you t
 - The keyword you're searching for.
 - Which user(s) said the keyword (along with the message the keyword was in).
 - The date and time the message was sent.
+- Rekishi only matches the actual word, not the word in another word.
+ - Example: "Let's go". Rekishi will pick this sentence up. "Let's ggo" won't be picked up.
 
 # Table Of Contents
 |Section|Explanation|
@@ -30,6 +32,7 @@ Rekishi is a tool used to collect chat data from a Twitch stream and gives you t
 - Save it in the **same** folder that has the Rekishi .exe file.
 - Run the Rekishi .exe file.
 - Any recipient(s) will receive an attached text file containing the parsed data.
+ - Note: Make sure to check junk mail if you don't see the email in your main inbox.
 
 ## Contributing
 Feel free to contribute.
