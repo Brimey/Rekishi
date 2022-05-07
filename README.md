@@ -29,7 +29,7 @@ Rekishi is a tool used to collect chat data from a Twitch stream and gives you t
 - Click "Get Info".
 - Save it in the **same** folder that has the Rekishi .exe file.
 - Run the Rekishi .exe file.
-- You should be emailed a text file containing the parsed data. 
+- Any recipients will receive an attached text file containing the parsed data.
 
 ## Contributing
 Feel free to contribute.
